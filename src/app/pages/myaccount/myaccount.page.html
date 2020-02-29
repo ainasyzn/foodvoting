@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="operator/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Gender</ion-label>
+      <ion-select name="gender" [(ngModel)]="gender" placeholder="Select One">
+        <ion-select-option value="female">Female</ion-select-option>
+        <ion-select-option value="male">Male</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input type="text" name="name" autocomplete="off" [(ngModel)]="name"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" (click)='update()'>Save</ion-button>
+
+  </ion-list>
+</form>
+</ion-content>

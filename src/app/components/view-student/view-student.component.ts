@@ -1,0 +1,106 @@
+import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../../services/firebase/firebase.service'
+import { AlertController, LoadingController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router'
+
+
+@Component({
+  selector: 'app-view-student',
+  templateUrl: './view-student.component.html',
+  styleUrls: ['./view-student.component.scss'],
+})
+export class ViewStudentComponent implements OnInit {
+  voteSelection: any = 0;
+
+  ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.getMenu();
+  }
+  id: any;
+  menus: any;
+
+  constructor(
+    private fb: FirebaseService,
+    private route: ActivatedRoute,
+    private alertController: AlertController,
+    private router: Router,
+    private loadingController: LoadingController
+  ) { }
+
+
+
+  async getMenu() {
+    let menus = await this.fb.readMenu();
+
+    menus.subscribe(res => {
+      this.menus = [];
+      res.map(r => {
+        let temp = Object.assign({ id: r.payload.doc.id }, r.payload.doc.data());
+        //console.log(temp);
+        if (temp["cafeid"] == this.id) {
+          this.menus.push(temp);
+        }
+      });
+    });
+  }
+
+  changeValue(i) {
+    this.voteSelection = i;
+  }
+
+  async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+      header: 'Comment',
+      inputs: [
+        {
+          name: 'name',
+          type: 'text',
+          placeholder: 'Enter something'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Saving vote',
+      duration: 1500
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
+  async voteMenu() {
+    this.menus[this.voteSelection].vote = parseInt(this.menus[this.voteSelection].vote) + 1
+    const menuId = this.menus[this.voteSelection].id;
+    delete this.menus[this.voteSelection].id;
+    try{
+      const update = await this.fb.updateMenu(menuId, this.menus[this.voteSelection]);
+      await this.presentLoading();
+      this.router.navigate(['/results']);
+    } catch (e){
+      alert(e.message);
+    }
+    
+  }
+
+}

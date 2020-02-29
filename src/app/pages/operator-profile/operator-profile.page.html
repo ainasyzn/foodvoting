@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <img src="./assets/images/cover.jpg" height="200px">
+
+    <ion-card-content>
+      <ion-card-title class="ion-text-center">
+        Aina Syazana Effendy
+      </ion-card-title>
+      <p class="ion-text-center">
+        Cafe Operator
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+      <ion-list-header>
+        <ion-label>Settings</ion-label>
+        
+      </ion-list-header>
+  
+      <ion-item (click)="myAccount()">
+        <ion-label>My Account</ion-label>
+        <ion-icon name="arrow-forward" color="medium" end></ion-icon>
+      </ion-item>
+  
+      <ion-item (click)="contact()">
+        <ion-label>Contact Us</ion-label>
+        <ion-icon name="arrow-forward" color="medium"  end></ion-icon>
+      </ion-item>
+  
+      <ion-item (click)="logout()">
+        <ion-label>Log Out</ion-label>
+        <ion-icon name="arrow-forward" color="medium"  end></ion-icon>
+      </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Menu List</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-list>
+  <ion-item-sliding *ngFor="let menu of menus">
+  <ion-item lines="inset" button (click)="navigate('edit', menu.id)">
+    <ion-label>
+      {{ menu.name }}
+      <p>{{ menu.createdAt | date:'short' }}</p>
+    </ion-label>
+    <ion-note slot="end" color="primary">{{menu.vote}}</ion-note>
+  </ion-item>
+
+  <ion-item-options side="end">
+    <ion-item-option (click)="remove(menu.id)" color="danger">
+      Delete
+      <ion-icon name="trash" slot="end"></ion-icon>
+    </ion-item-option>
+
+  </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+
+   <!-- fab placed to the bottom end -->
+   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" (click)="navigate('add', id)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
