@@ -1,17 +1,10 @@
 <ion-content>
-  <ion-slides pager="true">
+  <ion-slides pager="false" [options]="slideOpts">
     <ion-slide>
       <img src='assets/images/logo.jpeg' alt="logo">
-      <h2>Welcome to appName</h2>
-      <p>Add your intro</p>
-    </ion-slide>
-    <ion-slide>
-      <h2>Slide 2</h2>
-    </ion-slide>
-    <ion-slide>
-      <h2>Slide 3</h2>
-      
+      <h2>Welcome to Food Voting</h2>
+      <!-- <p>Add your intro</p> -->
     </ion-slide>
   </ion-slides>
-  <ion-button expand="block" color="secondary" (click)="navigateToLoginPage()">Start</ion-button>
+  <ion-button expand="block" fill="clear" color="secondary" (click)="navigateToLoginPage()">Start</ion-button>
 </ion-content>

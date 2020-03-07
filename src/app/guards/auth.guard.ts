@@ -21,9 +21,9 @@ export class AuthGuard implements CanActivate {
       message: 'Loading...'
     });
     loading.present();
-    const user = await this.getCurrentUser();
     
     try{
+    const user = await this.getCurrentUser();
       if(this.rerouteUser(user, loading)){
         return false;
       }
@@ -35,11 +35,15 @@ export class AuthGuard implements CanActivate {
   }
 
   async getCurrentUser(){
-    return new Promise(async (resolve) => {
-      const user  = await (await this.fb.readCurrentUser()).subscribe((res) => {
-        resolve(res);
-        user.unsubscribe();
-      });
+    return new Promise(async (resolve, error) => {
+      try{
+        const user  = await (await this.fb.readCurrentUser()).subscribe((res) => {
+          resolve(res);
+          user.unsubscribe();
+        });
+      } catch (e) {
+        error(e);
+      }
     });
   }
 
