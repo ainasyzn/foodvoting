@@ -27,8 +27,8 @@ const routes: Routes = [
         },
         {
             path:'profile',
-            loadChildren:() => import('../pages/operator-profile/operator-profile.module').then(
-                m => m.OperatorProfilePageModule
+            loadChildren:() => import('../pages/profile/profile.module').then(
+                m => m.ProfilePageModule
             )
         }
     ]
