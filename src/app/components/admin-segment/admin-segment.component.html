@@ -1,0 +1,29 @@
+<br>
+  <ion-toolbar>
+    <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="villages" value="3">
+      <ion-segment-button value="3">
+        <ion-label>Village 3</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="4">
+        <ion-label>Village 4</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <br>
+    <ion-searchbar showCancelButton="focus"></ion-searchbar>
+
+      <div *ngFor="let cafe of cafes" >
+        <ion-card (click)="toVillage(cafe.id)">
+          <ion-card-header>
+            <ion-card-subtitle>Village {{cafe.village}}</ion-card-subtitle>
+            <ion-card-title>{{cafe.name}}</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            {{cafe.desc}}
+          </ion-card-content>
+          <img [src]="cafe.img" alt="village">
+        </ion-card>
+      </div>
+  </ion-toolbar>
+
+  

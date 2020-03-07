@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { AngularFireList } from '@angular/fire/database/interfaces';
 import { Observable } from 'rxjs';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { NavController, ToastController } from '@ionic/angular';
+import { NavController, ToastController, LoadingController } from '@ionic/angular';
+import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 
 
 @Component({
@@ -14,42 +14,75 @@ import { NavController, ToastController } from '@ionic/angular';
 export class OperatorHomePage implements OnInit {
   data: Observable<any[]>;
   ref: AngularFireList<any>;
+  menus:any;
+  id:any;
+  chart: Chart;
+  constructor(
+    public navCtrl: NavController,
+    private loadingController: LoadingController,
+    public fb: FirebaseService
+  ) { }
 
-  constructor(private db: AngularFireDatabase, public navCtrl: NavController, private toastCtrl: ToastController) { }
+  async ngOnInit() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    const user = await this.fb.readCurrentUser();
+    user.subscribe((res)=>{
+      this.id = res["cafe"];
+      this.getMenu(loading);
+    })
+  }
+  
+  async getMenu(loadings){
+    let loading = loadings;
+    let menus = await this.fb.readMenu();
 
-  ngOnInit() {
-    this.showChart();
+    menus.subscribe(async (res) => {
+      if(!loading){
+        const loading = await this.loadingController.create();
+        await loading.present();
+      }
+      this.menus = [];
+      res.map(r => {        
+        let temp = Object.assign({id:r.payload.doc.id}, r.payload.doc.data());
+        try{
+          if(temp["cafeid"].replace(" ", "") == this.id.replace(" ", "")){
+            this.menus.push(temp);
+          }
+        } catch (e){}
+      });
+      console.log(this.menus);
+      this.showChart(this.menus, loading);
+    });
   }
 
-  showChart(){
+  showChart(menus, loading){
     var ctx = (<any>document.getElementById('chart')).getContext('2d');
-    var chart = new Chart(ctx, {
+    if(this.chart){
+      this.chart.destroy();
+    }
+    let labels = [], datas = [];
+    menus.forEach(element => {
+        labels.push(element["name"]);
+        datas.push(element["vote"]);
+    });
+
+    this.chart = new Chart(ctx, {
       type: 'horizontalBar',
       data: {
-        labels: ["VB 6", "PHP", "Delphi", ".Net", "TyprScript"],
+        labels: labels,
         datasets: [{
-          label: "This is chart",
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          data: [20, 5, 10, 25, 45],
+          label: "Votes",
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          data: datas,
           borderWidth: 1
         }]
       }
     });
+  
+  
+    loading.dismiss();
   }
 
 }

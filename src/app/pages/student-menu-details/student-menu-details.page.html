@@ -15,7 +15,7 @@
     <ion-segment-button value="nutrients">
       <ion-label>Nutrients</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="comments" *ngIf="type == 'edit'">
+    <ion-segment-button value="comments">
       <ion-label>Comments</ion-label>
     </ion-segment-button>
   </ion-segment>
@@ -30,52 +30,33 @@
         <ion-textarea placeholder="Enter some description" [(ngModel)]="todo.description"></ion-textarea>
       </ion-item>
       <br>
-      <ion-item>
-        <ion-label>Image</ion-label>
-        <ion-grid>
-          <ion-row>
-            <ion-col size-sm="1">
-              <label class="btn">
-                <ion-icon name="cloud-upload" id="add"></ion-icon> <input id="imgUpload" (change)="fileChanged($event)"
-                  type="file" hidden>
-              </label>
-            </ion-col>
-            <ion-col size-sm="1">
-              <label class="btn margin-left" (click)="removeImg()">
-                <ion-icon name="trash" id="rm"></ion-icon>
-              </label>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-item>
       <img [src]="image"/>
      <!--<input type="file" (change)="fileChanged($event)" /> -->
   
     </ion-list>
-    <ion-button expand="full" (click)="saveTodo()">Save</ion-button>
   </div>
 
   <div *ngIf="segment == 'nutrients'">
     <ion-item>
       <ion-label position="stacked">Carbohydrate (gram)</ion-label>
-      <ion-input required type="number" [(ngModel)]="nutrients.carb" (change)="calculateCalory()"></ion-input>
+      <ion-input required type="number" [(ngModel)]="nutrients.carb" readonly (change)="calculateCalory()"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Protein (gram)</ion-label>
-      <ion-input type="number" [(ngModel)]="nutrients.protein" (change)="calculateCalory()"></ion-input>
+      <ion-input type="number" [(ngModel)]="nutrients.protein" readonly (change)="calculateCalory()"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Fat (gram)</ion-label>
-      <ion-input type="number" [(ngModel)]="nutrients.fat" (change)="calculateCalory()"></ion-input>
+      <ion-input type="number" [(ngModel)]="nutrients.fat" readonly (change)="calculateCalory()"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Food Calory</ion-label>
       <ion-input type="number" [(ngModel)]="nutrients.cal" readonly></ion-input>
     </ion-item>
-    <ion-button expand="full" (click)="updateNutrients()">Save</ion-button>
   </div>
 
   <div *ngIf="segment == 'comments'">
+    <ion-button color="tertiary" (click)="presentAlertPrompt(todo)">Add Comment</ion-button>
     <div *ngFor="let comment of comments" class="comment-section ion-padding">
       <ion-label position="stacked">{{comment.name}}</ion-label>
       <br>

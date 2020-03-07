@@ -1,22 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from '../../services/firebase/firebase.service';
 import { Router } from '@angular/router';
-import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 
 @Component({
-  selector: 'app-operator',
-  templateUrl: './operator.component.html',
-  styleUrls: ['./operator.component.scss'],
+  selector: 'app-admin-segment',
+  templateUrl: './admin-segment.component.html',
+  styleUrls: ['./admin-segment.component.scss'],
 })
-export class OperatorComponent implements OnInit {
+export class AdminSegmentComponent implements OnInit {
   villages: String = "3";
   cafes: any;
+  constructor(
+    private router: Router,
+    private fb:FirebaseService
+  ) { 
+    this.getCafe(this.villages);
+  }
 
-  constructor(private router: Router, 
-    private fb:FirebaseService) { 
-      this.getCafe(this.villages);
-    }
+  ngOnInit() {
+  }
 
-  ngOnInit() {}
+  segmentChanged(ev: any) {
+    this.villages = ev.detail.value;
+    this.getCafe(this.villages);
+  }
 
   async getCafe(village) {
     let cafes = await this.fb.readCafe();
@@ -38,7 +45,7 @@ export class OperatorComponent implements OnInit {
   }
 
   toVillage(id){
-    this.router.navigate(['operator/village/' + id]);
+    this.router.navigate(['/admin-village/' + id]);
   }
-
 }
+

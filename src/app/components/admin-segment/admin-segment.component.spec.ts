@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { LogoutComponent } from './logout.component';
+import { AdminSegmentComponent } from './admin-segment.component';
 
-describe('LogoutComponent', () => {
-  let component: LogoutComponent;
-  let fixture: ComponentFixture<LogoutComponent>;
+describe('AdminSegmentComponent', () => {
+  let component: AdminSegmentComponent;
+  let fixture: ComponentFixture<AdminSegmentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogoutComponent ],
+      declarations: [ AdminSegmentComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LogoutComponent);
+    fixture = TestBed.createComponent(AdminSegmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { AdminPage } from './admin.page';
 
 const routes: Routes = [
@@ -14,6 +13,12 @@ const routes: Routes = [
     component: AdminPage,
     children: [
         {
+            path:'about',
+            loadChildren:() => import('../pages/about/about.module').then(
+                m => m.AboutPageModule
+            )
+        },
+        {
             path:'home',
             loadChildren:() => import('../pages/admin-home/admin-home.module').then(
                 m => m.AdminHomePageModule
@@ -21,8 +26,8 @@ const routes: Routes = [
         },
         {
             path:'profile',
-            loadChildren:() => import('../pages/admin-profile/admin-profile.module').then(
-                m => m.AdminProfilePageModule
+            loadChildren:() => import('../pages/profile/profile.module').then(
+                m => m.ProfilePageModule
             )
         }
     ]
@@ -30,7 +35,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
-export class AdminPageRoutingModule {}
+
+export class AdminRouter {}

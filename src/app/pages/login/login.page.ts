@@ -51,8 +51,7 @@ export class LoginPage implements OnInit {
   async getUser(username, loading){
     let users = await this.fb.readUser();
 
-    users.subscribe(res => {
-      console.log(res);
+    const userS = users.subscribe(res => {
       for(let i = 0; i < res.length; i++){
         let temp = Object.assign({id:res[i].payload.doc.id}, res[i].payload.doc.data()); 
         if(temp["name"] == username){
@@ -60,6 +59,7 @@ export class LoginPage implements OnInit {
           break;
         }
       }
+      userS.unsubscribe();
     });
   }
 
@@ -80,7 +80,6 @@ export class LoginPage implements OnInit {
           break;
         default:
           loading.dismiss();
-          alert("Hello admin");
           this.router.navigate(['admin/home']);
           break;
       }

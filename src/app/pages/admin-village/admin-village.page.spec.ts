@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { OperatorComponent } from './operator.component';
+import { AdminVillagePage } from './admin-village.page';
 
-describe('OperatorComponent', () => {
-  let component: OperatorComponent;
-  let fixture: ComponentFixture<OperatorComponent>;
+describe('AdminVillagePage', () => {
+  let component: AdminVillagePage;
+  let fixture: ComponentFixture<AdminVillagePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OperatorComponent ],
+      declarations: [ AdminVillagePage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(OperatorComponent);
+    fixture = TestBed.createComponent(AdminVillagePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

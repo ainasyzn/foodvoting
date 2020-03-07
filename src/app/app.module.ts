@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { IonicStorageModule } from '@ionic/storage';
 import { FirebaseService } from './services/firebase/firebase.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -41,9 +41,8 @@ var firebaseConfig = {
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFireModule,
-    AngularFireDatabaseModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     HttpClientModule
   ],
   providers: [

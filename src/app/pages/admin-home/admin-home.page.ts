@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomePage implements OnInit {
 
-  constructor() { }
+  id = null;
+  type : any;
+
+  constructor(
+    private route: ActivatedRoute, 
+    private nav: NavController) { }
 
   ngOnInit() {
-  }
 
+  
+  }
 }

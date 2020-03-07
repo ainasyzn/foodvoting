@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class FirebaseService {
 
   constructor(
     private afstore: AngularFirestore,
+    private afstorage: AngularFireStorage,
     private fauth: AngularFireAuth
   ) { }
 
@@ -18,6 +20,10 @@ export class FirebaseService {
         resolve(user);
       });
     });
+  }
+
+  logout(){
+		return this.fauth.auth.signOut();
   }
 
   async readCafe(){
@@ -58,5 +64,13 @@ export class FirebaseService {
   }
   async updateUser(user, id){
     await this.afstore.doc('users/' + id).set(user, { merge: true });
+  }
+
+  async updateMenuMerge(menu, id){
+    return await this.afstore.doc('menu/' + id).set(menu, { merge: true });
+  }
+
+  async uploadImage(details){
+    return await this.afstorage.storage.ref('menus/' + details.menuid + "/" + details.imgname + ".png");
   }
 }

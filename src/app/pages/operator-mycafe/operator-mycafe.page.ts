@@ -23,14 +23,12 @@ export class OperatorMycafePage implements OnInit {
 
   async ngOnInit() {
     const user = await this.fb.readCurrentUser();
-    console.log(user);
     user.subscribe((res)=>{
       this.id = res["cafe"];
       this.getMenu();
     })
   }
-
-
+  
   async getMenu(){
     let menus = await this.fb.readMenu();
 

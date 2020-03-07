@@ -15,10 +15,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: 'home/:id',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
@@ -59,10 +55,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/operator-registercafe/operator-registercafe.module').then( m => m.OperatorRegistercafePageModule)
   },
   {
-    path: 'results',
-    loadChildren: () => import('./pages/results/results.module').then( m => m.ResultsPageModule)
-  },
-  {
     path: 'myaccount',
     loadChildren: () => import('./pages/myaccount/myaccount.module').then( m => m.MyaccountPageModule)
   },
@@ -71,12 +63,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/contact/contact.module').then( m => m.ContactPageModule)
   },
   {
-    path: 'admin/home',
-    loadChildren: () => import('./pages/admin-home/admin-home.module').then( m => m.AdminHomePageModule)
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
   },
   {
-    path: 'admin/profile',
-    loadChildren: () => import('./pages/admin-profile/admin-profile.module').then( m => m.AdminProfilePageModule)
+    path: 'admin-village/:id',
+    loadChildren: () => import('./pages/admin-village/admin-village.module').then( m => m.AdminVillagePageModule)
+  },
+  {
+    path: 'student/menu/details/:id',
+    loadChildren: () => import('./pages/student-menu-details/student-menu-details.module').then( m => m.StudentMenuDetailsPageModule)
   }
 
 ];

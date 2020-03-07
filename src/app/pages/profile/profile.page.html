@@ -10,10 +10,10 @@
 
     <ion-card-content>
       <ion-card-title class="ion-text-center">
-        Aina Syazana Effendy
+        {{user?.name | titlecase}}
       </ion-card-title>
       <p class="ion-text-center">
-        Web App Developer
+        {{user?.type | titlecase}}
       </p>
     </ion-card-content>
   </ion-card>
@@ -24,10 +24,10 @@
         
       </ion-list-header>
   
-      <ion-item (click)="myAccount()">
+      <!-- <ion-item (click)="myAccount()">
         <ion-label>My Account</ion-label>
         <ion-icon name="arrow-forward" color="medium" end></ion-icon>
-      </ion-item>
+      </ion-item> -->
   
       <ion-item (click)="contact()">
         <ion-label>Contact Us</ion-label>

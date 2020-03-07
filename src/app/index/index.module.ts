@@ -4,11 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { IndexPageRoutingModule } from './index-routing.module';
 
 import { IndexPage } from './index.page';
 import { IndexRouter } from './index.router';
-import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [

@@ -36,7 +36,9 @@ export class ViewStudentComponent implements OnInit {
       this.menus = [];
       res.map(r => {
         let temp = Object.assign({ id: r.payload.doc.id }, r.payload.doc.data());
-        //console.log(temp);
+        if(!temp.hasOwnProperty('imageURL')){
+          temp["imageURL"] = "assets/images/no-image.jpg";
+        }
         if (temp["cafeid"] == this.id) {
           this.menus.push(temp);
         }
@@ -46,36 +48,6 @@ export class ViewStudentComponent implements OnInit {
 
   changeValue(i) {
     this.voteSelection = i;
-  }
-
-  async presentAlertPrompt() {
-    const alert = await this.alertController.create({
-      header: 'Comment',
-      inputs: [
-        {
-          name: 'name',
-          type: 'text',
-          placeholder: 'Enter something'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            console.log('Confirm Ok');
-          }
-        }
-      ]
-    });
-
-    await alert.present();
   }
 
   async presentLoading() {
@@ -96,11 +68,14 @@ export class ViewStudentComponent implements OnInit {
     try{
       const update = await this.fb.updateMenu(menuId, this.menus[this.voteSelection]);
       await this.presentLoading();
-      this.router.navigate(['/results']);
+      alert("Successfully Vote");
     } catch (e){
       alert(e.message);
     }
     
   }
 
+  toDetail(menu){
+    this.router.navigate(['student/menu/details/' + menu.id]);
+  }
 }

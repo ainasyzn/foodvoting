@@ -1,3 +1,36 @@
-<p>
-  view-admin works!
-</p>
+<ion-content>
+  <div class="ion-padding">
+    <div style="display:block"><canvas id="chart"></canvas></div>
+  </div>
+  <!-- Searchbar with cancel button shown on focus -->
+<ion-searchbar showCancelButton="focus"></ion-searchbar>
+  <ion-list radio-group [(ngModel)]="voteSelection">
+    <ion-list-header>
+      <ion-label>Select dish to vote</ion-label>
+    </ion-list-header>
+
+    <ion-radio-group>
+      <div *ngFor="let menu of menus; let i = index">
+        <ion-card>
+          <ion-item>
+            <ion-label>{{ menu.name }}</ion-label>
+            <ion-radio slot="end" [checked]="i == 0" (click)="changeValue(i)" value="{{menu.name}}"></ion-radio>
+          </ion-item>
+
+          <img [src]="menu.imageURL" alt="dish">
+          <ion-button color="tertiary" size="small" (click)="toDetail(menu)">See Details</ion-button>
+        </ion-card>
+      </div>
+    </ion-radio-group>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button color="secondary" (click)="voteMenu()">
+        Vote
+      </ion-fab-button>
+    </ion-fab>
+  </ion-list>
+  <br><br>
+</ion-content>

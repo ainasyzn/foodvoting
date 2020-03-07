@@ -10,6 +10,8 @@ export interface Todo {
   cafeid: string;
   createdAt: number;
   imageURL: string;
+  comments: Array<String>;
+  nutrients: any;
 }
 
 @Injectable({
@@ -45,6 +47,10 @@ export class TodoService {
 
   updateTodos(todo: Todo, id: string){
     return this.todosCollection.doc(id).update(todo);
+  }
+
+  mergeUpdateTodos(todo: Todo, id: string){
+    return this.todosCollection.doc(id).set(todo, {merge: true});
   }
 
   addTodos(todo: Todo){

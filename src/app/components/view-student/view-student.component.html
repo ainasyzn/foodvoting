@@ -1,4 +1,6 @@
 <ion-content>
+  
+<ion-searchbar showCancelButton="focus"></ion-searchbar>
   <ion-list radio-group [(ngModel)]="voteSelection">
     <ion-list-header>
       <ion-label>Select dish to vote</ion-label>
@@ -12,8 +14,8 @@
             <ion-radio slot="end" [checked]="i == 0" (click)="changeValue(i)" value="{{menu.name}}"></ion-radio>
           </ion-item>
 
-          <img [src]="menu.img" alt="dish">
-          <ion-button color="tertiary" size="small" (click)="presentAlertPrompt()">Add comment</ion-button>
+          <img [src]="menu.imageURL" alt="dish">
+          <ion-button color="tertiary" size="small" (click)="toDetail(menu)">See Details</ion-button>
         </ion-card>
       </div>
     </ion-radio-group>
