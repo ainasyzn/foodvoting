@@ -4,6 +4,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
+  <ion-card>
+    <div *ngIf="getUrlCond()">
+      <img [src]="about.imgURL" alt="dish">
+    </div>
+    <ion-card-content style="white-space:pre-wrap;">
+      <br />
+        {{about?.text}}
+      <br />
+    </ion-card-content>
+  </ion-card>
 </ion-content>

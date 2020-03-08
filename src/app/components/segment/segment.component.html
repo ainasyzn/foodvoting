@@ -9,7 +9,7 @@
       </ion-segment-button>
     </ion-segment>
     <br>
-    <ion-searchbar showCancelButton="focus"></ion-searchbar>
+    <ion-searchbar showCancelButton="focus" (ionChange)="filterItems($event)"></ion-searchbar>
 
       <div *ngFor="let cafe of cafes" >
         <ion-card (click)="toVillage(cafe.id)">

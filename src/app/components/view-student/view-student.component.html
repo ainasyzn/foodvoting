@@ -1,6 +1,6 @@
 <ion-content>
   
-<ion-searchbar showCancelButton="focus"></ion-searchbar>
+<ion-searchbar showCancelButton="focus" (ionChange)="filterItems($event)"></ion-searchbar>
   <ion-list radio-group [(ngModel)]="voteSelection">
     <ion-list-header>
       <ion-label>Select dish to vote</ion-label>

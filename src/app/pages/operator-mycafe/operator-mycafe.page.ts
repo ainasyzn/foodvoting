@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from 'src/app/services/todo.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 
 @Component({
@@ -9,16 +9,16 @@ import { FirebaseService } from 'src/app/services/firebase/firebase.service';
   styleUrls: ['./operator-mycafe.page.scss'],
 })
 export class OperatorMycafePage implements OnInit {
-
+  searchTerm:any;
   queryText: string;
   todos: Todo[];
   id: any;
   menus:any;
+  tempmenus:any;
 
   constructor(
     private router: Router,
     private fb: FirebaseService,
-    private route: ActivatedRoute
     ) { }
 
   async ngOnInit() {
@@ -41,17 +41,27 @@ export class OperatorMycafePage implements OnInit {
         }
       });
 
-      console.log(this.menus)
+      this.tempmenus = JSON.parse(JSON.stringify(this.menus));
+
     });
   }
 
   remove(id){
     console.log(id);
+    this.fb.deleteMenu(id).then((res) =>{
+      alert("Successfully delete");
+    });
   }
 
   navigate(type, id){
-    
     this.router.navigate(['/details/' + type + "/" + id]);
+  }
+
+  filterItems() {
+    this.menus = JSON.parse(JSON.stringify(this.tempmenus));
+    this.menus = this.menus.filter(item => {
+      return item.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+    });
   }
 
 

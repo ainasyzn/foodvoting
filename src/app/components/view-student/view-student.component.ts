@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 })
 export class ViewStudentComponent implements OnInit {
   voteSelection: any = 0;
-
+  temp:any;
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.getMenu();
@@ -43,6 +43,14 @@ export class ViewStudentComponent implements OnInit {
           this.menus.push(temp);
         }
       });
+      this.temp = this.menus;
+    });
+  }
+
+  filterItems(e) {
+    this.menus = JSON.parse(JSON.stringify(this.temp));
+    this.menus = this.menus.filter(item => {
+      return item.name.toLowerCase().indexOf(e.detail.value.toLowerCase()) > -1;
     });
   }
 

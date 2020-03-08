@@ -4,6 +4,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-searchbar showCancelButton="focus" [(ngModel)]="searchTerm"  (ionChange)="filterItems()"></ion-searchbar>
 <ion-list>
   <ion-item-sliding *ngFor="let menu of menus">
   <ion-item lines="inset" button (click)="navigate('edit', menu.id)">

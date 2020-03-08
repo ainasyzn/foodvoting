@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 
 @Component({
   selector: 'app-about',
@@ -6,10 +7,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements OnInit {
+  about: any = {
+    imgURL: "",
+    text: ""
+  };
+  constructor(
+    private fb: FirebaseService
+  ) {
+    this.about = {
+      imgURL: "",
+      text: ""
+    };
+  }
 
-  constructor() { }
+  async ngOnInit() {
+    const about = await (await this.fb.getAbout()).subscribe((res) => {
+      this.about = res;
+      this.about.imgURL = res["imgURL"];
+      about.unsubscribe();
+    })
+  }
 
-  ngOnInit() {
+  getUrlCond(){
+    if(this.about.imgURL.length > 0) return true;
+
+    return false;
   }
 
 }

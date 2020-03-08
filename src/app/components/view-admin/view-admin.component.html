@@ -3,7 +3,7 @@
     <div style="display:block"><canvas id="chart"></canvas></div>
   </div>
   <!-- Searchbar with cancel button shown on focus -->
-<ion-searchbar showCancelButton="focus"></ion-searchbar>
+<ion-searchbar showCancelButton="focus"  (ionChange)="filterItems($event)"></ion-searchbar>
   <ion-list radio-group [(ngModel)]="voteSelection">
     <ion-list-header>
       <ion-label>Select dish to vote</ion-label>
@@ -26,7 +26,7 @@
     <br>
     <br>
     <br>
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="menus.length">
       <ion-fab-button color="secondary" (click)="voteMenu()">
         Vote
       </ion-fab-button>

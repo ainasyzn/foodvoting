@@ -46,6 +46,10 @@ export class FirebaseService {
     return this.afstore.doc("menu/" + id).set(menu);
   }
 
+  async deleteMenu(id){
+    return this.afstore.doc('menu/' + id).delete();
+  }
+
   async createUser(uid, user){
     return this.afstore.doc('users/' + uid).set(user); 
   }
@@ -72,5 +76,13 @@ export class FirebaseService {
 
   async uploadImage(details){
     return await this.afstorage.storage.ref('menus/' + details.menuid + "/" + details.imgname + ".png");
+  }
+
+  async getAbout(){
+    return this.afstore.doc("misc/about").valueChanges();
+  }
+
+  async getContact(){
+    return this.afstore.doc("misc/contacts").valueChanges();
   }
 }

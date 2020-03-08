@@ -17,7 +17,7 @@ export class ViewAdminComponent implements OnInit {
   menus:any;
   chart: Chart;
   voteSelection: any = 0;
-
+  temp:any;
   id: any;
 
   constructor(
@@ -56,7 +56,15 @@ export class ViewAdminComponent implements OnInit {
           this.menus.push(temp);
         }
       });
+      this.temp = this.menus;
       this.showChart(this.menus, loading);
+    });
+  }
+
+  filterItems(e) {
+    this.menus = JSON.parse(JSON.stringify(this.temp));
+    this.menus = this.menus.filter(item => {
+      return item.name.toLowerCase().indexOf(e.detail.value.toLowerCase()) > -1;
     });
   }
 

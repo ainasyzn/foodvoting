@@ -5,6 +5,8 @@ import { ViewOperatorComponent } from './view-operator/view-operator.component';
 import { ViewStudentComponent } from './view-student/view-student.component';
 import { ViewAdminComponent } from './view-admin/view-admin.component';
 import { AdminSegmentComponent } from './admin-segment/admin-segment.component';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 const components = [
   SegmentComponent,

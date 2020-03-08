@@ -58,15 +58,15 @@
   <div *ngIf="segment == 'nutrients'">
     <ion-item>
       <ion-label position="stacked">Carbohydrate (gram)</ion-label>
-      <ion-input required type="number" [(ngModel)]="nutrients.carb" (change)="calculateCalory()"></ion-input>
+      <ion-input required type="number" [(ngModel)]="nutrients.carb" (ionChange)="calculateCalory()"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Protein (gram)</ion-label>
-      <ion-input type="number" [(ngModel)]="nutrients.protein" (change)="calculateCalory()"></ion-input>
+      <ion-input type="number" [(ngModel)]="nutrients.protein" (ionChange)="calculateCalory()"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Fat (gram)</ion-label>
-      <ion-input type="number" [(ngModel)]="nutrients.fat" (change)="calculateCalory()"></ion-input>
+      <ion-input type="number" [(ngModel)]="nutrients.fat" (ionChange)="calculateCalory()"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Food Calory</ion-label>

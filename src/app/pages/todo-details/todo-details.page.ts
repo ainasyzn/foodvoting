@@ -121,11 +121,13 @@ export class TodoDetailsPage implements OnInit {
     const loading = await this.loadingController.create();
     await loading.present();
     this.todo.imageURL = "";
-    if(this.imgDetail != ""){
-      const rec = await this.fb.uploadImage({menuid:this.id, imgname:this.imgDetail.name});
-      await rec.put(this.imgDetail)
-      this.todo.imageURL = await rec.getDownloadURL();
-    }
+    try{
+      if(this.imgDetail != ""){
+        const rec = await this.fb.uploadImage({menuid:this.id, imgname:this.imgDetail.name});
+        await rec.put(this.imgDetail)
+        this.todo.imageURL = await rec.getDownloadURL();
+      }
+    } catch (e) {}
 
     if (this.type == "edit") {
 

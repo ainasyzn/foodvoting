@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class SegmentComponent implements OnInit {
   villages: String = "3";
   cafes: any;
+  temp:any;
   constructor(
     private router: Router,
     private fb:FirebaseService
@@ -29,18 +30,22 @@ export class SegmentComponent implements OnInit {
     let cafes = await this.fb.readCafe();
 
     cafes.subscribe(res => {
-      console.log(res);
       this.cafes = [];
       res.map(r => {        
         let temp = Object.assign({id:r.payload.doc.id}, r.payload.doc.data());
-        console.log(temp);
         if(temp["village"] == village){
           this.cafes.push(temp);
         }
       });
 
-      
-      console.log(this.cafes);
+      this.temp = JSON.parse(JSON.stringify(this.cafes));
+    });
+  }
+
+  filterItems(e) {
+    this.cafes = JSON.parse(JSON.stringify(this.temp));
+    this.cafes = this.cafes.filter(item => {
+      return item.name.toLowerCase().indexOf(e.detail.value.toLowerCase()) > -1;
     });
   }
 
