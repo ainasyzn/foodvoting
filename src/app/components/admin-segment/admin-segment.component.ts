@@ -54,8 +54,8 @@ export class AdminSegmentComponent implements OnInit {
 
   toVillage(id){
     console.log(id);
-    this.navCtrl.navigateForward('/admin-village/' + id);
-    // this.router.navigate(['/admin-village/' + id]);
+    // this.navCtrl.navigateForward('/admin-village/' + id);
+    this.router.navigate(['/admin-village/' + id]);
   }
 }
 

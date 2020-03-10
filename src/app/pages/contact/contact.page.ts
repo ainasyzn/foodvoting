@@ -20,7 +20,7 @@ export class ContactPage implements OnInit {
   async ngOnInit() {
     const contacts = await (await this.fb.getContact()).subscribe((res) => {
       this.contacts = res;
-      contacts.unsubscribe();
+      // contacts.unsubscribe();
     })
   }
 

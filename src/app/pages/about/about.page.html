@@ -10,10 +10,11 @@
     <div *ngIf="getUrlCond()">
       <img [src]="about.imgURL" alt="dish">
     </div>
-    <ion-card-content style="white-space:pre-wrap;">
-      <br />
-        {{about?.text}}
-      <br />
+    <ion-card-content>
+      <div *ngFor="let text of about.texts">
+        <p>{{text}}</p>
+        <br/>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

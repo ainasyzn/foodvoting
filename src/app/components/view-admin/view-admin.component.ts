@@ -30,6 +30,7 @@ export class ViewAdminComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.menus = [];
     const loading = await this.loadingController.create();
     await loading.present();
     this.id = this.route.snapshot.params['id'];

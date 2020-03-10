@@ -12,10 +12,6 @@ import { ActivatedRoute, Router } from '@angular/router'
 export class ViewStudentComponent implements OnInit {
   voteSelection: any = 0;
   temp:any;
-  ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    this.getMenu();
-  }
   id: any;
   menus: any;
 
@@ -27,7 +23,11 @@ export class ViewStudentComponent implements OnInit {
     private loadingController: LoadingController
   ) { }
 
-
+  ngOnInit() {
+    this.menus = [];
+    this.id = this.route.snapshot.params['id'];
+    this.getMenu();
+  }
 
   async getMenu() {
     let menus = await this.fb.readMenu();

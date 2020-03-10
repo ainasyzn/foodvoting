@@ -9,14 +9,14 @@ import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 export class AboutPage implements OnInit {
   about: any = {
     imgURL: "",
-    text: ""
+    texts: []
   };
   constructor(
     private fb: FirebaseService
   ) {
     this.about = {
       imgURL: "",
-      text: ""
+      texts: []
     };
   }
 
@@ -24,7 +24,7 @@ export class AboutPage implements OnInit {
     const about = await (await this.fb.getAbout()).subscribe((res) => {
       this.about = res;
       this.about.imgURL = res["imgURL"];
-      about.unsubscribe();
+      // about.unsubscribe();
     })
   }
 

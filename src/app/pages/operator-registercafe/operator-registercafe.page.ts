@@ -27,7 +27,7 @@ export class OperatorRegistercafePage implements OnInit {
 
   async register() {
     let { village, name, desc } = this
-    const img = "http://2.bp.blogspot.com/-B6Khz4RCvgY/UVl5upLRq1I/AAAAAAAAgM4/tGZ3a7Sb8aY/s1600/bg10.JPG";
+    const img = "https://2.bp.blogspot.com/-B6Khz4RCvgY/UVl5upLRq1I/AAAAAAAAgM4/tGZ3a7Sb8aY/s1600/bg10.JPG";
 
 
     const cafe = {

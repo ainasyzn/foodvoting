@@ -23,7 +23,7 @@
     <br>
     <br>
     <br>
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="menus.length">
       <ion-fab-button color="secondary" (click)="voteMenu()">
         Vote
       </ion-fab-button>
